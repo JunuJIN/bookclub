@@ -1,4 +1,4 @@
-##### 5~-5까지의 텍스트를 긁어온다.
+## pdf, epub에서 텍스트를 긁어오는 함수
 def read_pdf(fname):
     import pdfplumber
     import re
@@ -63,7 +63,7 @@ def read_epub(file_path):
     raw_text = ""
     for item in book.get_items():
         if item.get_type() == ebooklib.ITEM_DOCUMENT:
-            chapter = item.get_content()
+            chapter = item.get_content().decode("utf-8")
             soup = BeautifulSoup(chapter, "html.parser")
             raw_text += soup.get_text() + "\n"
     refined = re.findall("(?<=[^가-힣])[가-힣0-9\,\\s]+[\.\?\!]", raw_text)
